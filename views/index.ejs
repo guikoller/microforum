@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Microforum</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Microforum</title>
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Microforum</h1>
-    <hr>
-    <%= name %>
+	<h1>Microforum</h1>
+	<hr>
+	<%= name %>
+	<br>
+	<% produto.forEach(produto => { %>
+		<h4><%= produto.nome %></h4>
+		<h4><%= produto.preco %></h4>
+		<hr> 
+	<% }) %> 
 </body>
 </html>
