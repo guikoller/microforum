@@ -14,4 +14,4 @@ app.get("/ask",(req,res) => {
     res.render("ask")
 })
 
-app.listen(port, () => console.log(`Application running in the port ${port}`))
+app.listen(port, () => console.log(`Application running at the port ${port}`))
