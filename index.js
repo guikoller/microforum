@@ -1,6 +1,13 @@
 const express = require("express")
 const app = express()
+const conn = require('./database/database')
 const port = 8080
+
+conn.authenticate().then(()=>{
+    console.log("db connected")
+}).catch((msg) =>{
+    console.log(msg)
+})
 
 app.set('view engine','ejs')
 app.use(express.static('public'))
