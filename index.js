@@ -4,7 +4,7 @@ const conn = require('./database/database')
 const port = 8080
 
 conn.authenticate().then(()=>{
-    console.log("db connected")
+    console.log("Database connected")
 }).catch((msg) =>{
     console.log(msg)
 })
