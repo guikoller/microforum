@@ -6,6 +6,24 @@
 	<h1><%=question.title %></h1>
 	<p><%=question.desciption %></p>
 	<hr>
+	<h2>Answers:</h2>
+	
+	<form method="POST" action="/answer">
+		<textarea name="body" placeholder="your answer here..." class="form-control" cols="30" rows="10"></textarea><br>
+		<input type="hidden" name="id" value="<%=question.id %>">
+		<button class="btn btn-success">Send</button>
+	</form>
+
+	<hr>
+
+	<% answers.forEach(answer => { %> 
+		<div class="card">
+			<div class="card-body">
+				<p><%=answer.body %> </p>
+			</div>
+		</div><br>
+	<%}) %> 
+
   </div>  
 </body>
 <%- include('partials/footer.ejs') %> 

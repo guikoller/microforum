@@ -3,6 +3,7 @@ const app = express()
 const conn = require('./database/database')
 const Question = require('./database/Question')
 const Answer = require('./database/Answer')
+const { redirect } = require("express/lib/response")
 const port = 8080
 
 conn.authenticate().then(()=>{
@@ -48,10 +49,30 @@ app.get("/question/:id", (req, res) => {
         where: {id :id}
     }).then(question => {
         if(question){
-            res.render("question", {question : question})
+            Answer.findAll({
+                where: {questionID : question.id},
+                order:[
+                    ['id', 'DESC']
+                ]
+            }).then( answers => {
+                res.render("question", {
+                    question : question,
+                    answers : answers
+                })
+            })
         }else{
             res.redirect("/")
         }
+    })
+})
+
+app.post("/answer", (req, res) => {
+    let answer  = req.body
+    Answer.create({
+        body: answer.body,
+        questionID: answer.id
+    }).then(() => {
+        res.redirect('/question/' + answer.id)
     })
 })
 
