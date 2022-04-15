@@ -16,8 +16,12 @@ app.use(express.static('public'))
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 
+// ROUTES
+
 app.get("/",(req,res) => {
-    res.render("index")
+    Question.findAll({ raw : true }).then( question  => {
+        res.render("index", {question : question})
+    })
 })
 
 app.get("/ask",(req,res) => {
@@ -31,7 +35,7 @@ app.post("/ask", (req, res) => {
         title: data.title,
         desciption: data.desc
     }).then(()=>{
-        res.redirect("/ask")
+        res.redirect("/")
     })
 })
 
