@@ -2,6 +2,7 @@ const express = require("express")
 const app = express()
 const conn = require('./database/database')
 const Question = require('./database/Question')
+const Answer = require('./database/Answer')
 const port = 8080
 
 conn.authenticate().then(()=>{
