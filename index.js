@@ -19,7 +19,9 @@ app.use(express.json())
 // ROUTES
 
 app.get("/",(req,res) => {
-    Question.findAll({ raw : true }).then( question  => {
+    Question.findAll({ raw : true, order:[
+        ["id", 'DESC']
+    ] }).then( question  => {
         res.render("index", {question : question})
     })
 })
@@ -36,6 +38,19 @@ app.post("/ask", (req, res) => {
         desciption: data.desc
     }).then(()=>{
         res.redirect("/")
+    })
+})
+
+app.get("/question/:id", (req, res) => {
+    let id = req.params.id
+    Question.findOne({
+        where: {id :id}
+    }).then(question => {
+        if(question){
+            res.render("question", {question : question})
+        }else{
+            res.redirect("/")
+        }
     })
 })
 
