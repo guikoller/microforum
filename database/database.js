@@ -1,6 +1,10 @@
 const Sequelize = require('sequelize')
 
-const connection =  new Sequelize('teste','guikoller','1234', {
+let database = 'microforum'
+let user = 'guikoller'
+let pwd = '1234'
+
+const connection =  new Sequelize(database, user, pwd, {
     host: 'localhost',
     dialect: 'mysql'
 })

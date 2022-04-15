@@ -1,12 +1,13 @@
 const express = require("express")
 const app = express()
 const conn = require('./database/database')
+const Question = require('./database/Question')
 const port = 8080
 
 conn.authenticate().then(()=>{
     console.log("Database connected")
 }).catch((msg) =>{
-    console.log(msg)
+    console.log("ERROR: " + msg)
 })
 
 app.set('view engine','ejs')
@@ -26,7 +27,12 @@ app.get("/ask",(req,res) => {
 app.post("/ask", (req, res) => {
     let data = req.body;
     console.log(data)
-    res.send('form received')
+    Question.create({
+        title: data.title,
+        desciption: data.desc
+    }).then(()=>{
+        res.redirect("/ask")
+    })
 })
 
 app.listen(port, () => console.log(`Application running at the port ${port}`))
